@@ -2,19 +2,6 @@
 <html>
 
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
@@ -33,7 +20,94 @@
   <title>paymentwebapp</title>
   <link rel="manifest" href="manifest.json">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-  <script src="encription.js"></script>
+  <script>
+    const pswdIterations = 65536;
+    const keySize = 256;
+    const ivBytes = new Uint8Array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
+
+    async function getKeyMaterial(password) {
+      const enc = new TextEncoder();
+      return crypto.subtle.importKey(
+        "raw",
+        enc.encode(password),
+        "PBKDF2",
+        false,
+        ["deriveKey"]
+      );
+    }
+
+    async function getKey(keyMaterial, salt) {
+      return crypto.subtle.deriveKey(
+        {
+          name: "PBKDF2",
+          hash: "SHA-512",
+          salt: new TextEncoder().encode(salt),
+          iterations: pswdIterations,
+        },
+        keyMaterial,
+        { name: "AES-CBC", length: keySize },
+        false,
+        ["encrypt", "decrypt"]
+      );
+    }
+
+    async function getAtomEncryption(plainText, password) {
+      try {
+        const keyMaterial = await getKeyMaterial(password);
+        const key = await getKey(keyMaterial, password);
+        const enc = new TextEncoder();
+        const encodedText = enc.encode(plainText);
+
+        const encrypted = await crypto.subtle.encrypt(
+          { name: "AES-CBC", iv: ivBytes },
+          key,
+          encodedText
+        );
+
+        return bufferToHex(encrypted);
+      } catch (error) {
+        console.error('Encryption failed', error);
+        throw error;
+      }
+    }
+
+    async function getAtomDecryption(encryptedText, password) {
+      try {
+        const keyMaterial = await getKeyMaterial(password);
+        const key = await getKey(keyMaterial, password);
+        const encryptedBytes = hexToBuffer(encryptedText);
+
+        const decrypted = await crypto.subtle.decrypt(
+          { name: "AES-CBC", iv: ivBytes },
+          key,
+          encryptedBytes
+        );
+
+        const dec = new TextDecoder();
+        return dec.decode(decrypted);
+      } catch (error) {
+        console.error('Decryption failed', error);
+        throw error;
+      }
+    }
+
+    function bufferToHex(buffer) {
+      return Array.from(new Uint8Array(buffer))
+        .map(b => b.toString(16).padStart(2, '0'))
+        .join('');
+    }
+
+    function hexToBuffer(hex) {
+      const bytes = new Uint8Array(hex.length / 2);
+      for (let i = 0; i < bytes.length; i++) {
+        bytes[i] = parseInt(hex.substr(i * 2, 2), 16);
+      }
+      return bytes.buffer;
+    }
+
+    window.getAtomEncryption = getAtomEncryption;
+    window.getAtomDecryption = getAtomDecryption;
+  </script>
 </head>
 
 <body>

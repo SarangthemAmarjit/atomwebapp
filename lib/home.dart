@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ots_new_kit/js_interop.dart';
 import 'web_view_container.dart';
 import 'atom_pay_helper.dart';
 import 'package:http/http.dart' as http;
-import 'dart:js' as js;
 
 class Home extends StatelessWidget {
   // merchant configuration data
@@ -83,69 +83,78 @@ class Home extends StatelessWidget {
   _getEncryptedPayUrl(context, responseHashKey, responseDecryptionKey) async {
     String reqJsonData = _getJsonPayloadData();
     debugPrint(reqJsonData);
-    // const platform = MethodChannel('flutter.dev/NDPSAESLibrary');
+
     try {
-      final String result = js.context.callMethod(
-          'initAES', ["encrypt", reqJsonData, requestEncryptionKey]);
-      // final String result = await platform.invokeMethod('NDPSAESInit', {
-      //   'AES_Method': 'encrypt',
-      //   'text': reqJsonData, // plain text for encryption
-      //   'encKey': requestEncryptionKey // encryption key
-      // });
-      String authEncryptedString = result.toString();
-      log('authEncryptedString :' + authEncryptedString);
+      // final String result = js.context.callMethod(
+      //     'initAES', ["encrypt", reqJsonData, requestEncryptionKey]);
+
+      String encryptedText =
+          await getAtomEncryption(reqJsonData, requestEncryptionKey);
+
+      log('authEncryptedString :' + encryptedText);
       // here is result.toString() parameter you will receive encrypted string
       // debugPrint("generated encrypted string: '$authEncryptedString'");
-      _getAtomTokenId(context, authEncryptedString);
+      _getAtomTokenId(context, encryptedText);
     } catch (e) {
       debugPrint("Failed to get encryption string: '$e'.");
     }
   }
 
   _getAtomTokenId(context, authEncryptedString) async {
-    var request = http.Request(
-        'POST', Uri.parse("https://caller.atomtech.in/ots/aipay/auth"));
-    request.bodyFields = {
-      'encData':
-          'dmTJVrvOcGiKyAPXtTvSNQjXgIgQUDGYygi/jbm7Bha5Ux/akhOx1HPNEu/mjJTCrCUrFVGzqbTRp5U/z0jV+TKLZtE6IcVgWCw8fgzKRpMKPKX5zU8q8R6KOCj9uYhMALqUuDOmsTLG8SbuGEqdfHLicINF7CE4JRrhCa8/2A5rjnYznNk1LeYF42iNO7lcsQhFxuZYobk0Hzr9bJ2vByjGRoiiMLfWxcm3T76Aowh724E1kyyfLg3zRjWQ2L/1cM9gbRYsel4zZOpHxFs2wKrCbNVwhYoE/nKxt/s+sPyoB7Zt5pYAhnZCbnW24K4RY/8jH0czzi12fnF8caSxcdR6i/pIqc/2o0SmzoNF947OuW8Md8lATsHq2+M+8lW4TlmweY7GESUFcqEgTZmXlN0jfUGmpRFki5Y0i6PLFviGMLEUD877HuB7cAx1uecm99+fW43oWSYtZyyQpbcwUdxYOB19ZCzyxBqR3aEjmvxB9/Kcw6DgCTf4AcOQIHpeWrVrhyy7S3NcMJmyGNhmtOY8OsVupoGsKW0XEGJsx8DkhXZ8pB6wMjRSMGFopBdYJKT8Xo8IdqDNsyMdt3N8qRrkZddtHNxHOXrKFeVbvs9W43Xq8AHmC6hN2r/hra/xQ23oPGMyWNua4DNf2cinQYjiRx0xcsSFThUPm4wO/sUhypgZoq/tq1EICVzFfl',
-      'merchId': login
+    final url = Uri.parse('https://caller.atomtech.in/ots/aipay/auth');
+    final headers = {
+      "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+      // Required for cookies, authorization headers with HTTPS
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
     };
+    final body = jsonEncode({
+      'encData': authEncryptedString,
+      'merchId': '9273',
+    });
+    try {
+      final response = await http.post(
+        url,
+        headers: headers,
+        body: body,
+      );
+      // request.bodyFields = {'encData': authEncryptedString, 'merchId': login};
 
-    http.StreamedResponse response = await request.send();
-    if (response.statusCode == 200) {
-      log(response.stream.bytesToString().toString());
-      var authApiResponse = await response.stream.bytesToString();
+      if (response.statusCode == 200) {
+        var authApiResponse = response.toString();
 
-      final split = authApiResponse.trim().split('&');
-      final Map<int, String> values = {
-        for (int i = 0; i < split.length; i++) i: split[i]
-      };
-      final splitTwo = values[1]!.split('=');
-      if (splitTwo[0] == 'encData') {
-        const platform = MethodChannel('flutter.dev/NDPSAESLibrary');
-        try {
-          final String result = await platform.invokeMethod('NDPSAESInit', {
-            'AES_Method': 'decrypt',
-            'text': splitTwo[1].toString(),
-            'encKey': responseDecryptionKey
-          });
-          debugPrint(result.toString()); // to read full response
-          var respJsonStr = result.toString();
-          Map<String, dynamic> jsonInput = jsonDecode(respJsonStr);
-          if (jsonInput["responseDetails"]["txnStatusCode"] == 'OTS0000') {
-            final atomTokenId = jsonInput["atomTokenId"].toString();
-            debugPrint("atomTokenId: $atomTokenId");
-            final String payDetails =
-                '{"atomTokenId" : "$atomTokenId","merchId": "$login","emailId": "$email","mobileNumber":"$mobile", "returnUrl":"$returnUrl"}';
-            _openNdpsPG(
-                payDetails, context, responseHashKey, responseDecryptionKey);
-          } else {
-            debugPrint("Problem in auth API response");
+        final split = authApiResponse.trim().split('&');
+        final Map<int, String> values = {
+          for (int i = 0; i < split.length; i++) i: split[i]
+        };
+        final splitTwo = values[1]!.split('=');
+        if (splitTwo[0] == 'encData') {
+          const platform = MethodChannel('flutter.dev/NDPSAESLibrary');
+          try {
+            final String result = await platform.invokeMethod('NDPSAESInit', {
+              'AES_Method': 'decrypt',
+              'text': splitTwo[1].toString(),
+              'encKey': responseDecryptionKey
+            });
+            debugPrint(result.toString()); // to read full response
+            var respJsonStr = result.toString();
+            Map<String, dynamic> jsonInput = jsonDecode(respJsonStr);
+            if (jsonInput["responseDetails"]["txnStatusCode"] == 'OTS0000') {
+              final atomTokenId = jsonInput["atomTokenId"].toString();
+              debugPrint("atomTokenId: $atomTokenId");
+              final String payDetails =
+                  '{"atomTokenId" : "$atomTokenId","merchId": "$login","emailId": "$email","mobileNumber":"$mobile", "returnUrl":"$returnUrl"}';
+              _openNdpsPG(
+                  payDetails, context, responseHashKey, responseDecryptionKey);
+            } else {
+              debugPrint("Problem in auth API response");
+            }
+          } on PlatformException catch (e) {
+            debugPrint("Failed to decrypt: '${e.message}'.");
           }
-        } on PlatformException catch (e) {
-          debugPrint("Failed to decrypt: '${e.message}'.");
         }
       }
+    } catch (e) {
+      log(e.toString());
     }
   }
 
