@@ -41,6 +41,9 @@ dependencies:
   url_launcher: ^6.1.8
   intl: ^0.17.0
   js: ^0.7.1
+  flutter_inappwebview: ^5.8.0
+  webview_flutter_web: ^0.1.0+4
+  webviewx_plus: ^0.3.2
 
 dev_dependencies:
   flutter_test:

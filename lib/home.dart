@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ots_new_kit/js_interop.dart';
@@ -9,7 +10,7 @@ import 'package:http/http.dart' as http;
 
 class Home extends StatelessWidget {
   // merchant configuration data
-  final String login = "317159"; //mandatory
+  final String login = "8952"; //mandatory
   final String password = 'Test@123'; //mandatory
   final String prodid = 'NSE'; //mandatory
   final String requestHashKey = 'KEY1234567234'; //mandatory
@@ -94,9 +95,81 @@ class Home extends StatelessWidget {
       log('authEncryptedString :' + encryptedText);
       // here is result.toString() parameter you will receive encrypted string
       // debugPrint("generated encrypted string: '$authEncryptedString'");
-      _getAtomTokenId(context, encryptedText);
+      // _getAtomTokenId(context, encryptedText);
+      makeRequest(encryptedText, reqJsonData, context);
     } catch (e) {
       debugPrint("Failed to get encryption string: '$e'.");
+    }
+  }
+
+  Future<void> makeRequest(
+      String encryptVal, String json, BuildContext context) async {
+    String testUrlEq =
+        "https://caller.atomtech.in/ots/aipay/auth?merchId=8952&encData=$encryptVal";
+
+    // Define the headers
+    Map<String, String> headers = {
+      HttpHeaders.contentTypeHeader: 'application/json',
+      HttpHeaders.acceptHeader: 'application/json',
+    };
+
+    // Encode the JSON data
+    var encoding = Encoding.getByName('utf-8');
+    List<int> data = utf8.encode(json);
+
+    // Create the HTTP request
+    var request = http.Request('POST', Uri.parse(testUrlEq));
+    request.headers.addAll(headers);
+    request.bodyBytes = data;
+
+    // Ignore SSL certificate errors (this should be used only for testing)
+    HttpOverrides.global = _MyHttpOverrides();
+
+    // Send the request
+    http.StreamedResponse response = await request.send();
+
+    // Get the response
+    if (response.statusCode == 200) {
+      print('Request successful');
+
+      String authApiResponse = await response.stream.bytesToString();
+
+      final split = authApiResponse.trim().split('&');
+      final Map<int, String> values = {
+        for (int i = 0; i < split.length; i++) i: split[i]
+      };
+      values[1];
+      log(values.toString());
+      final splitTwo = values[1]!.split('=');
+      if (splitTwo[0] == 'encData') {
+        try {
+          String result = await getAtomDecryption(
+              splitTwo[1].toString(), responseDecryptionKey);
+          // final String result = await platform.invokeMethod('NDPSAESInit', {
+          //   'AES_Method': 'decrypt',
+          //   'text': splitTwo[1].toString(),
+          //   'encKey': responseDecryptionKey
+          // });
+          debugPrint(result.toString()); // to read full response
+          var respJsonStr = result.toString();
+          Map<String, dynamic> jsonInput = jsonDecode(respJsonStr);
+          if (jsonInput["responseDetails"]["txnStatusCode"] == 'OTS0000') {
+            final atomTokenId = jsonInput["atomTokenId"].toString();
+            debugPrint("atomTokenId: $atomTokenId");
+            final String payDetails =
+                '{"atomTokenId" : "$atomTokenId","merchId": "$login","emailId": "$email","mobileNumber":"$mobile", "returnUrl":"$returnUrl"}';
+            _openNdpsPG(
+                payDetails, context, responseHashKey, responseDecryptionKey);
+          } else {
+            debugPrint("Problem in auth API response");
+          }
+        } on PlatformException catch (e) {
+          debugPrint("Failed to decrypt: '${e.message}'.");
+        }
+      }
+      print('Response body: $authApiResponse');
+    } else {
+      print('Request failed with status: ${response.statusCode}');
     }
   }
 
@@ -126,6 +199,7 @@ class Home extends StatelessWidget {
         final Map<int, String> values = {
           for (int i = 0; i < split.length; i++) i: split[i]
         };
+        values[1];
         final splitTwo = values[1]!.split('=');
         if (splitTwo[0] == 'encData') {
           const platform = MethodChannel('flutter.dev/NDPSAESLibrary');
@@ -196,5 +270,14 @@ class Home extends StatelessWidget {
     payDetails['udf5'] = udf5;
     String jsonPayLoadData = getRequestJsonData(payDetails);
     return jsonPayLoadData;
+  }
+}
+
+class _MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }
