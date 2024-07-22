@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style type="text/css">
+        #section {
+            width: 450px;
+            height: 220px;
+            word-wrap: break-word;
+        }
+
+        .moretext {
+            display: none;
+        }
+    </style>
+    <link rel='icon' href="https://paynetzuat.atomtech.in/staticdata/ots/images/other/favicon.ico" type='image/x-icon'>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width,height=device-height initial-scale=1">
+    <title>ATOM OTS</title>
+    <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"><script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script> -->
+    <script
+        type="text/javascript">        window.history.forward(); function noBack() { window.history.forward(); }    </script>
+    <!-- <script type="text/javascript">debugger;	function preback(){window.history.forward();}	setTimeout("preback()",0);	window.onunload=function(){null};</script> --><!-- <script>debugger;	window.onbeforeunload = function() {return false;}</script> -->
+    <script type="text/javascript" src="https://paynetzuat.atomtech.in/staticdata/ots/js/respond.js"></script>
+    <script type="text/javascript" src="https://paynetzuat.atomtech.in/staticdata/ots/js/cnv.js"></script>
+    <script type="text/javascript" src="https://paynetzuat.atomtech.in/staticdata/ots/js/jquery-2.2.4.js"></script>
+    <script type="text/javascript" src="https://paynetzuat.atomtech.in/staticdata/ots/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://paynetzuat.atomtech.in/staticdata/ots/css/bootstrap.min.css?v=1.0.0" />
+    <script type="text/javascript" src="https://paynetzuat.atomtech.in/staticdata/ots/js/td.js"></script>
+    <script> var surchargeList = JSON.parse('{"merchId":null,"atomTxnId":null,"source":null,"tracerId":null,"origin":null,"amount":null,"merchApiType":null,"subChannel":null,"serviceResponseCode":"SC0001","serviceMessage":null,"serviceDescription":null}');</script>
+    <script>var merchMid1 = 9135; var merchMid2 = 7;</script>
+    <script
+        type="text/javascript">$(document).ready(function () { var merchMid1 = 9135; var merchMid2 = 7; }); $(document).ready(function () { window.history.pushState(null, "", window.location.href); window.onpopstate = function () { window.history.pushState(null, "", window.location.href); }; });</script>
+    <script
+        type="text/javascript">       function getDefaultFileImageName(image) { image.src = "https://paynetzuat.atomtech.in/staticdata/ots/images/atom/atomlogo.jpg"; return true; }</script>
+    <script type="text/JavaScript" src="https://MomentJS.com/downloads/moment.js"></script>
+    <script>	$("#paymentsubmit").submit(function (event) { $("#paymentProcess").prop("disabled", true).addClass("disabled"); });	</script>
+    <style id="antiClickjack">
+        body {
+            display: none !important;
+        }
+    </style>
+    <script
+        type="text/javascript">	if (self === top) { var antiClickjack = document.getElementById("antiClickjack"); antiClickjack.parentNode.removeChild(antiClickjack); } else { top.location = self.location; }</script>
+    <style type="text/css">
+        .headingcolor {
+            color: #1071b6
+        }
+
+        .bluenew {
+            background-color: #1071b6;
+            color: #FFF;
+            margin: 0 auto;
+            padding: 30px 0 0 0;
+        }
+
+        .bluenew a {
+            color: #FFF;
+            width: 100%;
+            padding: 5px 2px;
+            text-decoration: none;
+            display: block
+        }
+
+        .bluenew li:hover {
+            background-color: #000
+        }
+
+        .hedings {
+            display: inline-block;
+            border: 1px solid red;
+            margin-top: 10px;
+            width: 90%;
+            padding: 5px 5px 5px 10px;
+            font-style: inherit;
+        }
+    </style>
+    <style>
+        .qr {
+            border: #2D4383 solid 3px;
+            width: 155px;
+            padding: 2px 2px;
+            background-color: #2D4383;
+        }
+
+        .not {
+            border-left: #088EC7 solid 2px;
+            width: 100%;
+            padding: 5px;
+            background-color: #eee;
+            font-size: 11px;
+        }
+    </style>
+    <style type="text/css">
+        #load {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            z-index: 9999;
+            background: url("https://paynetzuat.atomtech.in/staticdata/ots/images/other/loading.gif") no-repeat center center rgb(255, 255, 255);
+        }
+
+        .input-des {
+            width: 100%;
+            margin: 0px 0;
+            height: 40px;
+            background-position: 3px 10px;
+            background-repeat: no-repeat;
+            background-size: 18px;
+            padding: 0 0 0 15px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            border: #999 solid 1px;
+            float: left !important;
+        }
+
+        .mb-3 {
+            margin-bottom: 15px;
+        }
+
+        .otpInputDiv {
+            padding-right: 15px !important;
+        }
+
+        .verifyDiv {
+            padding-left: 15px !important;
+        }
+    </style>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div id="load" align="center"> <br>
+        <p style="text-align: center; font-size: 18px;">powered by</p> <img width="100" class="loading"
+            src="https://paynetzuat.atomtech.in/staticdata/ots/images/atom/atomlogo.jpg"
+            alt="NDPS technologies ltd."><br> <br>
+        <p style="text-align: center; font-size: 28px; color: #000;"></p>
+    </div>
+    <div class="text-center"> <strong><span id="timer" style="font-size: 50px; color: white;"></span></strong> </div>
+    <form id="paymentsubmit" name="paymentsubmit" autofilling="off" style="visibility: visible;" action="/ots/page/ppf"
+        method="POST" target="_top" autocomplete="off"> <!--For bifurcation   --> <input type="hidden" name="merchId"
+            id="merchId" value="9132">
+        <div class="container">
+            <div class="row white_head">
+                <div class="col-xs-6"> <img src="https://paynetzuat.atomtech.in/staticdata/ots/images/atom/atomlogo.jpg"
+                        alt="NDPS technologies ltd." width="100"> </div>
+                <div class="col-xs-6 right"> <img
+                        src="https://paynetzuat.atomtech.in/staticdata/ots/images/merchant/9132.jpg" alt="Merchant Logo"
+                        width="100" onerror='getDefaultFileImageName(this)'> </div>
+            </div>
+        </div>
+        <div class="container fill" id="maincontainer">
+            <div class="row">
+                <div class="col-xs-3 col-xs-push-9 gray">
+                    <div class="col-md-12"> <input type="hidden" name="originAmt" id="originAmt" value="100.00">
+                        <div class="col-md-12 bill"> <span class="small">Amount Payable</span>&nbsp;<br>
+                            <h1> <span class="curr" id="currencySymbol"></span>&nbsp;&nbsp; <span
+                                    id="calculatedAmount"></span> </h1> <input type="hidden" id="paypal_Usd"
+                                value="&#8377;"> <!--Use for Display Mobile Surcharge -->
+                            <div class="col-md-12 addns"></div>
+                            <div>
+                                <div id="enableNfsMerchantInfoMbl" onclick="openFeeStructureMbl()"
+                                    onmouseleave="closeFeeStructureMbl" style="display: none" class="info-icon">i</div>
+                                <table id="feeStructureOpenmbl" class="feeStructureOpenMbl"
+                                    onmouseover="closeFeeStructure()" style="display: none">
+                                    <!--  <span  onmouseover="closeFeeStructure()">&times; </span> -->
+                                    <!-- <div id="feeStructurepopup"   onmouseover="closeFeeStructure()"> -->
+                                    <tr>
+                                        <td align="left">
+                                            <h5 class="errortxt" id="nfsMerchantSystemFeemMbl"></h5>
+                                        </td>
+                                        <td align="right">
+                                            <h5 class="errortxt" id="nfsMerchantSystemFeeChargesMbl"></h5>
+                                        </td>
+                                        <td> <button id="closeButtonCardForInfo" class="close"
+                                                onmouseover="closeFeeStructureMbl()">X</button> </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">
+                                            <h5 class="errortxt" id="nfsProcessingFeeMbl"></h5>
+                                        </td>
+                                        <td align="right">
+                                            <h5 class="errortxt" id="nfsProcessingFeeChargesMbl"></h5>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">
+                                            <h5 class="errortxt" id="nfsPlatformFeeMbl"></h5>
+                                        </td>
+                                        <td align="right">
+                                            <h5 class="errortxt" id="nfsPlatformFeeChargesMbl"></h5>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">
+                                            <h5 class="errortxt" id="nfsVasAndOtherMbl"></h5>
+                                        </td>
+                                        <td align="right">
+                                            <h5 class="errortxt" id="nfsVasAndOtherChargesMbl"></h5>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <script
+                                    type="text/javascript">							function openFeeStructureMbl() { var nfsInfoIconMbl = document.getElementById('feeStructureOpenmbl'); nfsInfoIconMbl.style.display = 'block'; } function closeFeeStructureMbl() { var nfsInfoIconMbl = document.getElementById('feeStructureOpenmbl'); nfsInfoIconMbl.style.display = 'none'; }																			</script>
+                            </div>
+                            <hr />
+                            <div class="col-md-12 bill">
+                                <h1 style="font-size: 15px;">NDPS Test MID</h1> <span class="small">Transaction Id :
+                                    M123</span><br> <span class="small"> </span>
+                            </div>
+                        </div>
+                        <div class="txn">
+                            <div class="col-md-12 " id="surChargePanel"> <input type="hidden"
+                                    id="enableNfsMerchantValue" value="">
+                                <table width="90%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td></td>
+                                        <td id="surChargesSymbol" align="right"></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">
+                                            <h5 class="errortxt" id="idamt"></h5>
+                                        </td>
+                                        <td align="right">
+                                            <h5 class="errortxt" id="idamtAmount"></h5>
+                                        </td>
+                                    </tr> <!-- Free Structure Implementation Start For Merchant System Fee-->
+                                    <!-- <tr>											<td align="left"><h5 class="errortxt" id="systemfee"></h5></td>																				<td align="right"><h5 class="errortxt"												id="systemfeecharge"></h5></td>											</tr> -->
+                                    <!-- Fee Structure Implementation End -->
+                                    <tr>
+                                        <td align="left">
+                                            <h5 class="errortxt" id="merchantCharges"></h5>
+                                        </td>
+                                        <td align="right">
+                                            <h5 class="errortxt" id="merchantChargesAmount"></h5>
+                                        </td>
+                                        <td id="enableNfsMerchantInfo" align="right" onmouseover="openFeeStructure()"
+                                            onmouseleave="closeFeeStructure()" style="display: none">
+                                            <div class="info-icon">i</div>
+                                        </td>
+                                    <tr>
+                                        <td align="left">
+                                            <h5 class="errortxt" id="serviceCharges"></h5>
+                                        </td>
+                                        <td align="right">
+                                            <h5 class="errortxt" id="serviceChargesAmount"></h5>
+                                        </td>
+                                    </tr>
+                                    <table id="feeStructure" class="feeStructureOpen" onmouseover="closeFeeStructure()">
+                                        <!--  <span  onmouseover="closeFeeStructure()">&times; </span> -->
+                                        <!-- <div id="feeStructurepopup"   onmouseover="closeFeeStructure()"> -->
+                                        <tr>
+                                            <td align="left">
+                                                <h5 class="errortxt" id="nfsMerchantSystemFee"></h5>
+                                            </td>
+                                            <td align="right">
+                                                <h5 class="errortxt" id="nfsMerchantSystemFeeCharges"></h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left">
+                                                <h5 class="errortxt" id="nfsProcessingFee"></h5>
+                                            </td>
+                                            <td align="right">
+                                                <h5 class="errortxt" id="nfsProcessingFeeCharges"></h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left">
+                                                <h5 class="errortxt" id="nfsPlatformFee"></h5>
+                                            </td>
+                                            <td align="right">
+                                                <h5 class="errortxt" id="nfsPlatformFeeCharges"></h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left">
+                                                <h5 class="errortxt" id="nfsVasAndOther"></h5>
+                                            </td>
+                                            <td align="right">
+                                                <h5 class="errortxt" id="nfsVasAndOtherCharges"></h5>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    </tr> <!-- </div> --> <!--  <tr> -->
+                                    <!-- <td align="left"><h5 class="errortxt" id="systemfee"></h5></td> -->
+                                    <!-- <td align="right"><h5 class="errortxt"												id="systemfeecharge"></h5></td> -->
+                                    <!-- </tr> --> <!-- <tr>																						</tr>   										 <tr> -->
+                                    <!-- <td align="left"><h5 class="errortxt" id="vasothercharges"></h5></td>																				<td align="right"><h5 class="errortxt"												id="vasotherchargesFee"></h5></td> -->
+                                    <!-- </tr> --> <!-- </tr> -->
+                                    <!-- Fee Structure Implementation Start For platform Fee -->
+                                    <style>
+                                        .info-icon {
+                                            position: relative;
+                                            display: inline-block;
+                                            width: 24px;
+                                            height: 24px;
+                                            background-color: #1E90FF;
+                                            color: white;
+                                            border-radius: 50%;
+                                            text-align: center;
+                                            line-height: 24px;
+                                            cursor: pointer;
+                                            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+                                        }
+
+                                        .feeStructureOpen {
+                                            background-color: #1E90FF;
+                                            color: white;
+                                            text-align: center;
+                                            border-radius: 6px;
+                                            padding: 10px;
+                                            position: absolute;
+                                            display: none;
+                                            z-index: 1000;
+                                            /*  top: 50%;        left: 50%; */
+                                            transform: translate(-50%, -50%);
+                                            width: 300px;
+                                            border: 1px solid #ccc;
+                                        }
+
+                                        .info-icon .feeStructureOpen::after {
+                                            content: "";
+                                            position: absolute;
+                                            top: 100%;
+                                            left: 50%;
+                                            border-width: 5px;
+                                            border-style: solid;
+                                            border-color: #1E90FF transparent transparent transparent;
+                                        }
+
+                                        /*      .feeStructureClose {        position: absolute;        top: 5px;        right: 5px;        cursor: pointer;    } */
+                                    </style>
+                                    <!-- <tr>											<td align="left"><h5 class="errortxt" id="platformfee"></h5></td>																				<td align="right"><h5 class="errortxt"												id="platformfeecharge"></h5></td>											</tr> -->
+                                    <!--  --> <!-- Fee Structure Implementation VAS and Other Charges -->
+                                    <!-- 			<tr>											<td align="left"><h5 class="errortxt" id="vasothercharges"></h5></td>																				<td align="right"><h5 class="errortxt"												id="vasotherchargesFee"></h5></td>											</tr> -->
+                                    <!--  -->
+                                </table>
+                                <div>
+                                    <h5 class="errortxt" id="taxWarning"></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3 col-xs-pull-3 bluenew">
+                    <div class="navbar1"> <span class="h4">PAYMENT MODE</span> <input type="hidden" id="activeNaveBar"
+                            value="CC">
+                        <ul>
+                            <li class=""><a href="#creditcard" class="left-arrow"
+                                    onclick="return commonFunction('CC');">&nbsp;&nbsp; <img
+                                        src="https://paynetzuat.atomtech.in/staticdata/ots/images/paymode/cc.png"
+                                        alt="Credit Card" width="40">Credit Card </a></li>
+                        </ul>
+                        <ul>
+                            <li class=""><a href="#debitcard" class="left-arrow"
+                                    onclick="return commonFunction('DC');">&nbsp;&nbsp; <img
+                                        src="https://paynetzuat.atomtech.in/staticdata/ots/images/paymode/dc.png"
+                                        alt="Debit Card" width="40">Debit Card </a></li>
+                        </ul>
+                        <ul>
+                            <li class=""><a href="#netbanking" class="left-arrow"
+                                    onclick="return commonFunction('NB');">&nbsp;&nbsp; <img
+                                        src="https://paynetzuat.atomtech.in/staticdata/ots/images/paymode/nb.png"
+                                        alt="Net Banking" width="40">Net Banking </a></li>
+                        </ul>
+                        <ul>
+                            <li class=""><a href="#upi" class="left-arrow"
+                                    onclick="return commonFunction('UP');">&nbsp;&nbsp; <img
+                                        src="https://paynetzuat.atomtech.in/staticdata/ots/images/paymode/cc.png"
+                                        alt="UPI" width="40">Pay Using UPI ID/VPA </a></li>
+                            <script type="text/javascript"
+                                src="https://paynetzuat.atomtech.in/staticdata/ots/js/vpa.js?v=2.1.6"></script>
+                            <!-- For UPI -->
+                        </ul>
+                        <ul>
+                            <li class=""><a href="#neft" class="left-arrow"
+                                    onclick="return commonFunction('NR');">&nbsp;&nbsp; <img
+                                        src="https://paynetzuat.atomtech.in/staticdata/ots/images/paymode/nr.png"
+                                        alt="NEFT/RTGS" width="40">NEFT / RTGS </a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-xs-pull-3 white">
+                    <div class="space panel-group" id="accordion"> <input type="hidden" id="mobileAccess" />
+                        <!-- Credit Card Details -->
+                        <div class="col-md-12 panel panel-default space1" id="creditcard">
+                            <script type="text/javascript"
+                                src="https://paynetzuat.atomtech.in/staticdata/ots/js/bv.js?v=2.2.9"></script> <a
+                                data-toggle="collapse" data-parent="#accordion" onclick="mobileSurcharge($(this));"
+                                href="#cc">
+                                <div class="panel-heading">
+                                    <h1 class="headingcolor"> Credit Card <img
+                                            src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/blankcard.png"
+                                            alt="ccDefaultCard" id="ccdefaultcard" width="37"> <img alt="visacard"
+                                            id="ccvisacard" width="37"
+                                            src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/visa.png"
+                                            class="cardnumlogo" style="display: none"> <img alt="mastercard"
+                                            id="ccmastercard" width="37"
+                                            src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/master.png"
+                                            class="cardnumlogo" style="display: none"> <img alt="maestrocard"
+                                            id="ccmaestrocard" width="37"
+                                            src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/maestro.png"
+                                            class="cardnumlogo" style="display: none"> <img alt="rupay" id="ccrupay"
+                                            width="37"
+                                            src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/rupay.png"
+                                            class="cardnumlogo" style="display: none"> <img alt="amex" width="37"
+                                            id="ccamex"
+                                            src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/amex.png?v=1.3.1"
+                                            style="display: none"> <img alt="jcb" id="ccjcb" width="37"
+                                            src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/jcb.png"
+                                            style="display: none"> <img alt="diners" width="37" id="ccdiners"
+                                            src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/dinerclub.png"
+                                            style="display: none"> </h1>
+                                </div>
+                            </a>
+                            <div id="cc" class="panel-collapse collapse">
+                                <div class="col-md-12 bill_pay"> <input type="tel" class="bill_data" id="ccCardNo"
+                                        name="ccCardNo" placeholder="Credit Card Number" maxlength="19"
+                                        onchange="binvalidate(this.value,'CC','','',9132);" value=""
+                                        onkeypress="return isNumberKey(event,'cc');"> <select id="ccMonth"
+                                        name="ccMonth">
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select> <select id="ccYear" name="ccYear">
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2027">2027</option>
+                                        <option value="2028">2028</option>
+                                        <option value="2029">2029</option>
+                                        <option value="2030">2030</option>
+                                        <option value="2031">2031</option>
+                                        <option value="2032">2032</option>
+                                        <option value="2033">2033</option>
+                                        <option value="2034">2034</option>
+                                        <option value="2035">2035</option>
+                                        <option value="2036">2036</option>
+                                        <option value="2037">2037</option>
+                                        <option value="2038">2038</option>
+                                        <option value="2039">2039</option>
+                                        <option value="2040">2040</option>
+                                        <option value="2041">2041</option>
+                                        <option value="2042">2042</option>
+                                        <option value="2043">2043</option>
+                                        <option value="2044">2044</option>
+                                        <option value="2045">2045</option>
+                                        <option value="2046">2046</option>
+                                        <option value="2047">2047</option>
+                                        <option value="2048">2048</option>
+                                        <option value="2049">2049</option>
+                                        <option value="2050">2050</option>
+                                    </select> <input type="password" id="ccCcv" name="ccCcv" class="cvv" maxlength="4"
+                                        placeholder="000" onkeypress="return isNumberKey(event,'cc');"> <span
+                                        id="cctdId"> <i id="openButtonCardForInfo" class="info-button">i</i>
+                                        <div class="hidden-text" id="hidden-text-cc"> <button
+                                                id="closeButtonCardForInfo" class="close">X</button>
+                                            <p class="cvv-info" id="ccdefaultinfo">The CVV number is the last three
+                                                digits at the back of your card. For American Express cards, the CVV is
+                                                a 4-digit number on the front of the card.</p>
+                                            <p class="cvv-info" id="ccinfononamex" style="display: none">The CVV number
+                                                is the last three digits at the back of your card.</p>
+                                            <p class="cvv-info" id="ccinfoamex" style="display: none">The CVV is a
+                                                4-digit number on the front of the card.</p>
+                                            <div style="text-align: right"> <img class="card-image"
+                                                    src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/MASTERVISAAMEXNOTE.png"
+                                                    alt="" id="ccdefaultimage"> <img class="card-image"
+                                                    src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/MASTERVISANOTE.png"
+                                                    alt="" id="ccimagenonamex" style="display:none"> <img
+                                                    class="card-image"
+                                                    src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/AMEXNOTE.png"
+                                                    alt="" id="ccimageamex" style="display:none"> </div> /*
+                                            <script
+                                                type="text/javascript">															function openInfoForCardCC() { var iconForCard = document.getElementById('hidden-text-cc'); iconForCard.style.display = 'block'; 																// console.log('dot');																}															function closeInfoForCardCC(){																var iconForCard = document.getElementById('hidden-text-cc');																iconForCard.style.display = 'none'; 															}														</script>
+                                            */
+                                        </div>
+                                    </span> <input class="name" type="text" id="ccCardName" name="ccCardName" value=""
+                                        maxlength="50" placeholder="Name On Card" /> <input type="text" class="name"
+                                        id="ccbinBankName" name="ccbinBankName" maxlength="50" placeholder="Bank Name"
+                                        readonly onblur="checkAlphabateOnly(this.value,'CC'); " /> <br>
+                                    <div id="ccerr" style="color: red;"></div>
+                                    <div id="mxerr" style="color: red;"></div> <input type="hidden" id="ccCardType"
+                                        value="CC" /> <br> <input type="hidden" id="isAllowSaveCard" value="0 " /> <br>
+                                    <div>
+                                        <!-- 	<h1 class = "hedings" style = "font-weight: normal;font-size: 13px; ">	Please Note: If your credit or debit card has not been used for ecommerce transactions,													it will be blocked by your bank for all online transactions as per RBI notification effective													March 16,2020.													In case your transaction is failing,please contact your card issuing bank to enable your card													for online transactions.</h1> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- Credit Card Details --> <!-- Debit Card Details -->
+                        <div class="col-md-12 panel panel-default space1" id="debitcard">
+                            <script type="text/javascript"
+                                src="https://paynetzuat.atomtech.in/staticdata/ots/js/bv.js?v=2.2.9"></script> <a
+                                data-toggle="collapse" onclick="mobileSurcharge($(this));" data-parent="#accordion"
+                                href="#dc">
+                                <div class="panel-heading">
+                                    <h1 class="headingcolor"> Debit Card <img
+                                            src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/blankcard.png"
+                                            alt="dcDefaultCard" id="dcdefaultcard" width="37"> <img alt="visacard"
+                                            id="dcvisacard" width="37"
+                                            src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/visa.png"
+                                            class="cardnumlogo" style="display: none"> <img alt="mastercard"
+                                            id="dcmastercard" width="37"
+                                            src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/master.png"
+                                            class="cardnumlogo" style="display: none"> <img alt="maestrocard"
+                                            id="dcmaestrocard" width="37"
+                                            src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/maestro.png"
+                                            class="cardnumlogo" style="display: none"> <img alt="rupay" id="dcrupay"
+                                            width="37"
+                                            src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/rupay.png"
+                                            class="cardnumlogo" style="display: none"> <img alt="amex" id="dcamex"
+                                            width="37"
+                                            src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/amex.png?v=1.3.1"
+                                            style="display: none"> <img alt="jcb" id="dcjcb" width="37"
+                                            src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/jcb.png"
+                                            style="display: none"> <img alt="diners" width="37" id="dcdiners"
+                                            src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/dinerclub.png"
+                                            style="display: none"> </h1>
+                                </div>
+                            </a>
+                            <div id="dc" class="panel-collapse collapse">
+                                <div class="col-md-12 bill_pay"> <input type="tel" class="bill_data" id="dcCardNo"
+                                        name="dcCardNo" maxlength="19" placeholder="Debit Card Number" value=""
+                                        onchange="return binvalidate(this.value,'DC','','',9132);"
+                                        onkeypress="return isNumberKey(event,'dc');"> <select id="dcMonth"
+                                        name="dcMonth">
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select> <select id="dcYear" name="dcYear">
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2027">2027</option>
+                                        <option value="2028">2028</option>
+                                        <option value="2029">2029</option>
+                                        <option value="2030">2030</option>
+                                        <option value="2031">2031</option>
+                                        <option value="2032">2032</option>
+                                        <option value="2033">2033</option>
+                                        <option value="2034">2034</option>
+                                        <option value="2035">2035</option>
+                                        <option value="2036">2036</option>
+                                        <option value="2037">2037</option>
+                                        <option value="2038">2038</option>
+                                        <option value="2039">2039</option>
+                                        <option value="2040">2040</option>
+                                        <option value="2041">2041</option>
+                                        <option value="2042">2042</option>
+                                        <option value="2043">2043</option>
+                                        <option value="2044">2044</option>
+                                        <option value="2045">2045</option>
+                                        <option value="2046">2046</option>
+                                        <option value="2047">2047</option>
+                                        <option value="2048">2048</option>
+                                        <option value="2049">2049</option>
+                                        <option value="2050">2050</option>
+                                    </select> <input type="password" id="dcCcv" name="dcCcv" class="cvv" maxlength="4"
+                                        placeholder="000" onkeypress="return isNumberKey(event,'dc');"> <span
+                                        id="dctdId"> <i id="openButtonCardForInfoDc" class="info-button">i</i>
+                                        <div class="hidden-text" id="hidden-text-dc"> <button
+                                                id="closeButtonCardForInfodc" class="close">X</button>
+                                            <p class="cvv-info" id="dcdefaultinfo">The CVV number is the last three
+                                                digits at the back of your card. For American Express cards, the CVV is
+                                                a 4-digit number on the front of the card.</p>
+                                            <p class="cvv-info" id="dcinfononamex" style="display: none">The CVV number
+                                                is the last three digits at the back of your card.</p>
+                                            <p class="cvv-info" id="dcinfoamex" style="display: none">The CVV is a
+                                                4-digit number on the front of the card.</p>
+                                            <div style="text-align: right"> <img class="card-image"
+                                                    src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/MASTERVISAAMEXNOTE.png"
+                                                    alt="" id="dcdefaultimage"> <img class="card-image"
+                                                    src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/MASTERVISANOTE.png"
+                                                    alt="" id="dcimagenonamex" style="display:none"> <img
+                                                    class="card-image"
+                                                    src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/AMEXNOTE.png"
+                                                    alt="" id="dcimageamex" style="display:none"> </div> /*
+                                            <script
+                                                type="text/javascript">															//function openInfoForCard(){																//var iconForCard = document.getElementById('hidden-text');																iconForCard.style.display = 'block'; 																// console.log('dot');																}															function closeInfoForCard(){																var iconForCard = document.getElementById('hidden-text');																iconForCard.style.display = 'none'; 															}														</script>
+                                            */
+                                        </div>
+                                    </span> <input type="text" id="dcCardName" name="dcCardName" class="name"
+                                        maxlength="50" value="" placeholder="Name On Card"> <input type="text"
+                                        class="name" id="dcbinBankName" name="dcbinBankName" maxlength="50"
+                                        placeholder="Bank Name" readonly onblur="checkAlphabateOnly(this.value,'DC'); ">
+                                    <br>
+                                    <div id="dcerr" style="color: red;"></div> <input type="hidden" name="dcCardType"
+                                        id="dcCardType" value="DC"> <br>
+                                    <div>
+                                        <!-- <h1 class = "hedings" style = "font-weight: normal;font-size: 13px;">	Please Note: If your credit or debit card has not been used for ecommerce transactions,													it will be blocked by your bank for all online transactions as per RBI notification effective													March 16,2020.													In case your transaction is failing,please contact your card issuing bank to enable your card													for online transactions.</h1>	 -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- Debit Card Details --> <!-- Net Banking Details -->
+                        <div class="col-md-12 panel panel-default space1" id="netbanking"> <a data-toggle="collapse"
+                                data-parent="#accordion" onclick="mobileSurcharge($(this));" href="#nb">
+                                <div class="panel-heading">
+                                    <h1 class="headingcolor">Net Banking Details</h1>
+                                </div>
+                            </a>
+                            <div id="nb" class="panel-collapse collapse">
+                                <div class="col-md-12 bill_pay">
+                                    <div class="col-sm-12 col-xxs-12" style="margin-top: 2%; padding-left: 2%">
+                                        <span>Select from all other banks</span>
+                                    </div>
+                                    <div class="col-md-12 bill_pay"> <br> <select id="bankID" name="bankID"
+                                            emptyOption="false" class="form-control selectpicker nbselect"
+                                            onchange="disableMajorBanks(this.value,9132)">
+                                            <option value="2001">Atom Bank</option>
+                                        </select> &nbsp;&nbsp; </div>
+                                </div>
+                                <div id="nberr"></div> <input type="hidden" name="" value="NetBanking"
+                                    id="checkNetBanking">
+                            </div>
+                        </div> <!-- Net Banking Details --> <!--UPI -->
+                        <div class="col-md-12 panel panel-default space1" id="upi"> <a data-toggle="collapse"
+                                data-parent="#accordion" onclick="mobileSurcharge($(this));" href="#up">
+                                <div class="panel-heading">
+                                    <h1 class="headingcolor">Pay Using UPI ID/VPA</h1>
+                                </div>
+                            </a>
+                            <div id="up" class="panel-collapse collapse">
+                                <div class="col-md-12 bill_pay">
+                                    <div class="col-md-12"> <input id="virtualAdd" name="virtualAdd"
+                                            placeholder="Payer Virtual Address" onblur="vpavalidation(this.id,9132);"
+                                            type="text" value="" maxlength="255" /> </div>
+                                    <div class="col-md-12"> <input id="userNameVal" name="userNameVal"
+                                            placeholder="Payer Name" readonly="readonly" type="text" value="" /> </div>
+                                    <div id="upierr"></div>
+                                </div>
+                            </div>
+                        </div> <!--UPI --> <!-- NEFT/RTGS -->
+                        <div class="col-md-12 panel panel-default space1" id="neft"> <a data-toggle="collapse"
+                                data-parent="#accordion" onClick="mobileSurcharge($(this));" href="#nr">
+                                <div class="panel-heading">
+                                    <h1 class="headingcolor">NEFT/RTGS</h1>
+                                </div>
+                            </a>
+                            <div id="nr" class="panel-collapse collapse">
+                                <div class="col-md-12 bill_pay"> <input type="text" class="i_info" id="accountNumber"
+                                        name="accountNumber" maxLength="30" placeholder="Account Number"
+                                        value="ZATOMZ000000569428" readonly="readonly" style="display: none" /> <input
+                                        type="text" class="i_info" id="ifscCode" name="ifscCode" maxLength="30"
+                                        placeholder="IFSC Code" value="INDB0000008" readonly="readonly"
+                                        style="display: none" />
+                                    <div class="col-md-12 col-xxs-12"> <label style="display: none"><b>Please use above
+                                                details for NEFT/RTGS Funds Transfer! </b></label> </div>
+                                    <div class="col-md-4 col-xxs-12"> <img
+                                            src="https://paynetzuat.atomtech.in/staticdata/ots/images/other/neft.jpg"
+                                            alt="NEFT" width="110" height="55"
+                                            style="margin-left: 5px; margin-top: 10px;" /> </div>
+                                    <div class="col-md-12 col-xxs-12">
+                                        <div class="col-md-12 col-xxs-12">
+                                            <h1
+                                                style="font-size: 13px; font-family: calibri, sans-serif; font-weight: normal;">
+                                                Note: Please click on "Confirm" button to generate the Challan
+                                                (comprising of account details)<br> Login to Netbanking and add new
+                                                beneficiary account<br> Do not initiate more than 1 transaction for
+                                                given account<br> For payment confirmation will receive UTR details from
+                                                bank<br> </h1>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-xxs-12"> <br />
+                                        <div class="col-md-12 col-xxs-12"> <label>The Account number and the IFSC code
+                                                will be send to you on the below entered number and Email ID</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="nefterr"></div>
+                            </div>
+                        </div> <!-- NEFT/RTGS --> <!-- need to add new pay mode  -->
+                        <div class="col-xs-12 space2">
+                            <hr />
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div id="custInfoJq" style="display: none;">
+                                        <h1>Billing Details</h1>
+                                        <div class="col-md-6 mobile"> <input type="tel" id="udf3" name="udf3"
+                                                placeholder="Mobile Number" maxlength="20"
+                                                onkeypress="return isNumberKey(event);" /> </div>
+                                        <div class="col-md-6 email"> <input type="text" id="udf2" name="udf2"
+                                                placeholder="Email Id" maxlength="40" /> </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div id="billingInfoJq" style="display: none;">
+                                        <div class="col-md-12 bill_info1"> <input type="text" id="addr1" name="addr1"
+                                                placeholder="Address Line 1" maxlength="100" /> </div>
+                                        <div class="col-md-12 bill_info1"> <input type="text" id="addr2" name="addr2"
+                                                placeholder="Address Line 2" maxlength="100" /> </div>
+                                        <div class="col-xs-6 address"> <select id="country" name="country"
+                                                onchange="zipStatus(this.value)"> </select> </div>
+                                        <div class="col-xs-6 address"> <input type="text" id="state" name="state"
+                                                placeholder="State" maxlength="20" /> </div>
+                                        <div class="col-xs-6 address"> <input type="text" id="city" name="city"
+                                                placeholder="City" maxlength="20" /> </div>
+                                        <div class="col-xs-6 address"> <input id="zipcode" name="zipcode"
+                                                placeholder="Zip Code"
+                                                onKeyPress="if(this.value.length==10) return false;return alpha(event);" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="billinfoerr"></div> <br />
+                            </div>
+                        </div>
+                        <div> <input type="submit" value="Pay Now" id="paymentProcess"
+                                style="background-color: #1071b6;" class="btn btn-info col-xs-8 col-xs-8 space3"
+                                onclick="return validateData(this.value)"> </div>
+                        <div> <input type="submit" value="Cancel" id="ttp" name="ttp"
+                                class="btn btn-default col-xs-3 col-xs-3 space3"
+                                onclick="return validateData(this.value)"> </div>
+                    </div>
+                </div>
+            </div> <input type="hidden" id="timeout" name="timeout" value="TIMEDOUT"
+                onclick="return validateTimeout(this.value)" />
+            <div></div> <!-- Footer -->
+            <div align="center" class="container">
+                <div class="col-md-12 footer"> <span>By clicking Pay Now you are agreeing to <a
+                            href="javascript:void(0);" onclick="javascript:return securityPolicy();">Terms &amp;
+                            Conditions</a> </span>
+                    <div class="col-md-12 white1"> <a href="http://www.visa.ca/verified/infopane/index.html"
+                            target="_blank"> <img
+                                src="https://paynetzuat.atomtech.in/staticdata/ots/images/footer/visaverified.jpg"
+                                border="0" alt="visa"> </a>&nbsp;
+                        <!-- <a href="http://www.mastercardbusiness.com/mcbiz/orphans/securecode/index.jsp?template=/securecode&amp;content=comingsoon"							target="_blank"> -->
+                        <img src="https://paynetzuat.atomtech.in/staticdata/ots/images/footer/mastercard.jpg" border="0"
+                            alt="master card"> &nbsp; <img alt="safekey"
+                            src="https://paynetzuat.atomtech.in/staticdata/ots/images/footer/amexsafekey.png">&nbsp;
+                        <img alt="visacard"
+                            src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/visa.png">&nbsp; <img
+                            alt="mastercard"
+                            src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/master.png">&nbsp; <img
+                            alt="debitcard"
+                            src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/dinerclub.png">&nbsp;
+                        <!--  Added For Amex Validation START -->
+                        <!-- <a href="javascript:void(0);" target="_blank">  --> <img alt="amex"
+                            src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/amex.png?v=1.3.1">&nbsp;
+                        <!-- <a href="javascript:void(0);" target="_blank">  --> <img alt="diners"
+                            src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/jcb.png" class="dci">&nbsp;
+                        <!--  Added For Amex Validation END --> <!-- <a href="javascript:void(0);" target="_blank">  -->
+                        <img alt="rupaycard" src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/rupay.png"
+                            class=""> &nbsp; <!-- <a href="javascript:void(0);" target="_blank">  --> <img
+                            src="https://paynetzuat.atomtech.in/staticdata/ots/images/scheme/maestro.png" alt="Maestro"
+                            border="0"> &nbsp; <a href="https://atom.qrcsolutionz.com/"> <img
+                                src="https://paynetzuat.atomtech.in/staticdata/ots/images/footer/pciqrc.jpg"
+                                alt="pciQrc"> </a>&nbsp; <a
+                            href="https://www.visa.com/splisting/viewSPDetail.do?spId=1760&amp;coName=Atom%20Technologies%20Limited&amp;HeadCountryList=INDIA"
+                            target="_blank"> <img
+                                src="https://paynetzuat.atomtech.in/staticdata/ots/images/footer/dbst18.png" border="0"
+                                alt="dbst"> </a>&nbsp; <br> <br>
+                        <div class="power"> <strong>Powered by</strong><br> <br> <img
+                                src="https://paynetzuat.atomtech.in/staticdata/ots/images/atom/atomlogo.jpg" width="100"
+                                alt="NDPS technologies ltd."> </div>
+                    </div>
+                </div>
+                <div class="col-md-12 powerby"> <span class="small">powered by</span><br> <img
+                        src="https://paynetzuat.atomtech.in/staticdata/ots/images/atom/atomlogo.jpg" width="80"
+                        alt="NDPS technologies ltd."> </div>
+            </div> <input type="hidden" name="scCard" value="0" id="scCard"> <input type="hidden" name="retryMode"
+                value="mode" id="retryMode"> <input type="hidden" name="billBank" value="" id="billBank"> <input
+                type="hidden" name="numberZipID" value='' id="numberZipID"> <input type="hidden" id="amountdisplay"
+                value="100.00"> <input type="hidden" id="billingInfoVal" value="0"> <input type="hidden"
+                id="custInfoVal" value="1"> <input type="hidden" id="mobileTransaction" value="0"> <input type="hidden"
+                id="intentString" value=""> <input type="hidden" id="emailMask" value=""> <input type="hidden"
+                id="mobMask" value="99XX9XXX99"> <input type="hidden" id="tracerId" value="11000000569428"> <input
+                type="hidden" id="isOnlyMX" value="false"> <input type="hidden" id="subChannelList" value="CC"> <input
+                type="hidden" id="subChannelList" value="DC"> <input type="hidden" id="subChannelList" value="NB">
+            <input type="hidden" id="subChannelList" value="UP"> <input type="hidden" id="subChannelList" value="NR">
+            <input type="hidden" id="txnType" name="txnType" value=""> <input type="hidden" id="emiTenure"
+                name="emiTenure" value=""> <input type="hidden" id="emiBankName" name="emiBankName" value=""> <input
+                type="hidden" id="emiIdValue" name="emiIdValue" value=""> <input type="hidden" id="isPaymentRequest"
+                name="isPaymentRequest" value="false"> <input type="hidden" id="cardScheme" name="cardScheme" value="">
+            <input type="hidden" id="otsBankId" name="otsBankId" value=""> <input type="hidden" id="cardVariant"
+                name="cardVariant" value=""> <input type="hidden" id="bqrServiceProvider" name="bqrServiceProvider"
+                value=""> <input type="hidden" id="domIntl" name="domIntl" value=""> <input type="hidden"
+                id="txnBinBankName" name="txnBinBankName" value=""> <input id="otsHashToken" name="otsHashToken"
+                type="hidden"
+                value="b5a124cb543f84c08137f08f27dfd3258415dff07d1385c4035faa4f9e97936582be095c50a2a742729039d886c4a95152c14c4e92369744db4d0c00bab86fb8" />
+            <input id="otsRouter" name="otsRouter" type="hidden" value="4F6E4CED6A8E30E34D717ED2A2E5AFF7" /> <input
+                id="otsInfo" name="otsInfo" type="hidden" value="02853412701111072143582024228947" /> <input id="otsPro"
+                name="otsPro" type="hidden" value="9132" /> <!-- Surcharges implementation started -->
+        </div>
+    </form>
+    <script type="text/javascript" src="https://paynetzuat.atomtech.in/staticdata/ots/js/pp.js?v=2.11.15"></script>
+</body>
+
+</html>

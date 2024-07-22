@@ -5,6 +5,12 @@
     <title>AtomInstaPay</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        var cdnScript = document.createElement('script');
+        cdnScript.setAttribute('src', 'https://paynetzuat.atomtech.in/staticdata/ots/js/pp.js?v=2.11.15');
+
+        document.head.appendChild(cdnScript);
+    </script>
     <link rel="stylesheet" href="https://payment.atomtech.in/staticdata/ots/css/style.css?v=1.12">
 </head>
 
@@ -12,13 +18,7 @@
     <p style="text-align:center;margin-top:20%;">Please wait</p>
     <p style="display: none;">AIPAYLocalFile</p>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // JavaScript file
-            var cdnScript = document.createElement('script');
-            cdnScript.setAttribute('src', 'https://paynetzuat.atomtech.in/staticdata/ots/js/pp.js?v=2.11.15');
 
-            document.head.appendChild(cdnScript);
-        });
         function openPay(payDetails) {
             let convertedJson = JSON.parse(payDetails);
             const options = {
