@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ots_new_kit/constant/web_view_container2.dart';
 import 'package:ots_new_kit/js_interop.dart';
 import 'web_view_container.dart';
 import 'atom_pay_helper.dart';
@@ -25,14 +26,14 @@ class Home extends StatelessWidget {
   final String txncurr = "INR"; //mandatory
   final String mccCode = "5499"; //mandatory
   final String merchType = "R"; //mandatory
-  final String amount = "1.00"; //mandatory
+  final String amount = "100.00"; //mandatory
 
   final String mode = "uat"; // change live for production
 
   final String custFirstName = 'test'; //optional
   final String custLastName = 'user'; //optional
   final String mobile = '8888888888'; //optional
-  final String email = 'test@gmail.com'; //optional
+  final String email = 'amarjit@gmail.com'; //optional
   final String address = 'mumbai'; //optional
   final String custacc = '639827'; //optional
   final String udf1 = "udf1"; //optional
