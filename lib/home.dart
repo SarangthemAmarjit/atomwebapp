@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ots_new_kit/constant/web_view_container2.dart';
 import 'package:ots_new_kit/js_interop.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'web_view_container.dart';
 import 'atom_pay_helper.dart';
 import 'package:http/http.dart' as http;
@@ -106,7 +107,7 @@ class Home extends StatelessWidget {
   Future<void> makeRequest(
       String encryptVal, String json, BuildContext context) async {
     String testUrlEq =
-        "https://caller.atomtech.in/ots/aipay/auth?merchId=8952&encData=$encryptVal";
+        "https://caller.atomtech.in/ots/aipay/auth?merchId=$login&encData=$encryptVal";
 
     // Define the headers
     Map<String, String> headers = {
@@ -159,8 +160,8 @@ class Home extends StatelessWidget {
             debugPrint("atomTokenId: $atomTokenId");
             final String payDetails =
                 '{"atomTokenId" : "$atomTokenId","merchId": "$login","emailId": "$email","mobileNumber":"$mobile", "returnUrl":"$returnUrl"}';
-            _openNdpsPG(
-                payDetails, context, responseHashKey, responseDecryptionKey);
+            _openNdpsPG(payDetails, context, responseHashKey,
+                responseDecryptionKey, encryptVal);
           } else {
             debugPrint("Problem in auth API response");
           }
@@ -174,71 +175,13 @@ class Home extends StatelessWidget {
     }
   }
 
-  _getAtomTokenId(context, authEncryptedString) async {
-    final url = Uri.parse('https://caller.atomtech.in/ots/aipay/auth');
-    final headers = {
-      "Access-Control-Allow-Origin": "*", // Required for CORS support to work
-      // Required for cookies, authorization headers with HTTPS
-      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-    };
-    final body = jsonEncode({
-      'encData': authEncryptedString,
-      'merchId': '9273',
-    });
-    try {
-      final response = await http.post(
-        url,
-        headers: headers,
-        body: body,
-      );
-      // request.bodyFields = {'encData': authEncryptedString, 'merchId': login};
-
-      if (response.statusCode == 200) {
-        var authApiResponse = response.toString();
-
-        final split = authApiResponse.trim().split('&');
-        final Map<int, String> values = {
-          for (int i = 0; i < split.length; i++) i: split[i]
-        };
-        values[1];
-        final splitTwo = values[1]!.split('=');
-        if (splitTwo[0] == 'encData') {
-          const platform = MethodChannel('flutter.dev/NDPSAESLibrary');
-          try {
-            final String result = await platform.invokeMethod('NDPSAESInit', {
-              'AES_Method': 'decrypt',
-              'text': splitTwo[1].toString(),
-              'encKey': responseDecryptionKey
-            });
-            debugPrint(result.toString()); // to read full response
-            var respJsonStr = result.toString();
-            Map<String, dynamic> jsonInput = jsonDecode(respJsonStr);
-            if (jsonInput["responseDetails"]["txnStatusCode"] == 'OTS0000') {
-              final atomTokenId = jsonInput["atomTokenId"].toString();
-              debugPrint("atomTokenId: $atomTokenId");
-              final String payDetails =
-                  '{"atomTokenId" : "$atomTokenId","merchId": "$login","emailId": "$email","mobileNumber":"$mobile", "returnUrl":"$returnUrl"}';
-              _openNdpsPG(
-                  payDetails, context, responseHashKey, responseDecryptionKey);
-            } else {
-              debugPrint("Problem in auth API response");
-            }
-          } on PlatformException catch (e) {
-            debugPrint("Failed to decrypt: '${e.message}'.");
-          }
-        }
-      }
-    } catch (e) {
-      log(e.toString());
-    }
-  }
-
-  _openNdpsPG(payDetails, context, responseHashKey, responseDecryptionKey) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => WebViewContainer(
-                mode, payDetails, responseHashKey, responseDecryptionKey)));
+  _openNdpsPG(payDetails, context, responseHashKey, responseDecryptionKey,
+      authEncryptedString) {
+    //   Response.Redirect("https://caller.atomtech.in/ots/payment/txn?merchId=8952&encData=" + Encryptval);
+    launchUrl(
+        Uri.parse(
+            'https://caller.atomtech.in/ots/payment/txn?merchId=$login&encData=$authEncryptedString'),
+        mode: LaunchMode.inAppWebView);
   }
 
   _getJsonPayloadData() {
