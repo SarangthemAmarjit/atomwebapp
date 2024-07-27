@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ots_new_kit/constant/web_view_container2.dart';
 import 'package:ots_new_kit/js_interop.dart';
+import 'package:ots_new_kit/web_view_container%20copy.dart';
 import 'web_view_container.dart';
 import 'atom_pay_helper.dart';
 import 'package:http/http.dart' as http;
@@ -67,8 +68,8 @@ class Home extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: () => _initNdpsPayment(
-                  context, responseHashKey, responseDecryptionKey),
+              onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const WebViewPage())),
               child: const Text('Open'),
             ),
           ],

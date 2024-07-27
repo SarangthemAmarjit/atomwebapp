@@ -3,7 +3,6 @@ import 'package:ots_new_kit/constant/registerweb.dart';
 import 'home.dart';
 
 void main() {
-  registerwebimplementation();
   runApp(const MyApp());
 }
 
